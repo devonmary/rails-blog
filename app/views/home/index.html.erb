@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="iso-8859-7">
+    <meta charset="Devon's Blog">
   </head>
   <div class="background-image">
     <header>
@@ -15,8 +15,9 @@
     </header>
     <body>
       <div class ="first_section">
-        <h1 class="title-1">Hi, I'm Antoine</h1>
-        <h2 class="title-2">Welcome to my website</h2>
+        <h1 class="title-1">Hey. It's Devon!</h1>
+        <h2 style=width50%;text-align:center;color:lightcoral; id="weather-summary"> The weather is kitters and puppers </h1>
+        <h2 class="title-2">Welcome to my page</h2>
       </div>
     </div>
       <div class="container">
@@ -28,19 +29,19 @@
             <div class="skills">
               <h3 class="skills_title">My skills</h3>
               <ul class="skills-list">
-                <li id="skill-1">HTML</li>
-                <li id="skill-2">CSS</li>
-                <li id="skill-3">JavaScript</li>
-                <li id="skill-4">Ruby</li>
+                <li id="skill-1">Baking</li>
+                <li id="skill-2">Product Management</li>
+                <li id="skill-3">Not JavaScript</li>
+                <li id="skill-4">Not Ruby</li>
               </ul>
             </div>
             <div class="passions">
               <h3 class="passions_title">My Passions</h3>
               <ul class="passions-list">
-                <li id="passion-1">Music</li>
-                <li id="passion-2">Video Games</li>
-                <li id="passion-3">Traveling</li>
-                <li id="passion-4">Skiing</li>
+                <li id="passion-1">Drawing</li>
+                <li id="passion-2">Reality Television</li>
+                <li id="passion-3">Running</li>
+                <li id="passion-4">Field Hockey</li>
               </ul>
             </div>
         </div>
@@ -48,7 +49,7 @@
       <hr>
         <div id="contact">
           <h2 class="contact-title">Contact Me</h2>
-          <form id="contact_me" action="https://formspree.io/antoine@productschool.com" method="POST">
+          <form id="contact_me" action="https://formspree.io/devon@stylesage.co" method="POST">
             <input required="required" type="text" name="name" placeholder="Your name"/>
             <input required="required" type="email" name="_replyto" placeholder="Your email">
             <textarea required="required" placeholder="I'd love to hear from you - send me a message!"></textarea>
@@ -58,40 +59,31 @@
     </div>
       <footer>
         <div class="copyright">
-        <p>Copyright (c) 2017 Copyright Antoine Krajnc All Rights Reserved.</p>
+        <p>Copyright (c) 2017 Copyright Devon Mary Novotnak All Rights Reserved.</p>
         </div>
       </footer>
+      
       <script>
-        function getRandomColor(){
-          return "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
-        }
-        function changeTitleColor(){
-          var randomColor = getRandomColor()
-          $(".title-1").css({color: randomColor})
-        }
+        navigator.geolocation.getCurrentPosition(function(position)  {
+          debugger
         
-          $('.background-image').on('click', changeTitleColor);
+          const productSchoolLat = position.coords.latitude || "37.796465";
+          const productSchoolLng = position.coords.longitude ||"-122.402492";
           
-          navigator.geolocation.getCurrentPosition((location) => {
-            var latitude = location.coords.latitude
-            var longitude = location.coords.longitude
-            
-              $.ajax({
-                    url: 'api/v1/weather',
-                    type: 'GET',
-                    data: { lat: latitude, lon: longitude} ,
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (response) {
-                      $(".title-2").replaceWith("<h2 class='title-2'>It is currently "+ response["currently"]["temperature"] + " degrees</h2>");
-                    },
-                    error: function () {
-                        console.log(response);
-                    }
-                });
+          $.ajax({
+            url: 'api/v1/get_weather',
+            type: 'GET',
+            data: { lat: productSchoolLat, lng: productSchoolLng } ,
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+              $('#weather-summary').text(response.daily.summary)
+              console.log(response);
+            },
+            error: function (error) {
+              console.log(error);
+            }
           });
-  
- 
-
+        });    
       </script>
     </body>
 </html>

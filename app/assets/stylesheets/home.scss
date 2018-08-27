@@ -9,10 +9,11 @@ a {
   text-decoration: none;
 }
 .background-image{
-  background-image: image_url("generic_background.jpg");
+  background-image: url("https://static1.squarespace.com/static/530a5306e4b0e23db62a79ed/t/58a62e2abe65945770583345/1487285830499/BkToile_Slider1.jpg?format=1500w");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  opacity: 0.7;
 }
 .navigation-bar{
   background-color: rgba(0,0,0, 0.01);
@@ -51,12 +52,14 @@ a {
 
 .title-1 {
   font-size:60px;
-  color: white;
+  color:initial;
+  font-family: "courier new";
 }
 
 .title-2 {
   font-size:30px;
-  color: white;
+  color:initial;
+  font-family: "courier new";
 }
 
 .container {
